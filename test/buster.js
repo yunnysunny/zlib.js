@@ -13,12 +13,12 @@ var browserCommon = {
       "test/util.js"
     ],
     tests: [
-      'test/browser-inflate-test.js',
+      /* 'test/browser-inflate-test.js',
       'test/browser-zlib-test.js',
       'test/browser-gunzip-test.js',
       'test/browser-gzip-test.js',
       'test/browser-unzip-test.js',
-      'test/browser-zip-test.js'
+      'test/browser-zip-test.js' */
     ]
 };
 
@@ -35,8 +35,9 @@ config["codepath"] = mixin(
       "test/plain.js"
     ],
     tests: [
-      'test/browser-codepath-test.js',
-      'test/browser-raw-test.js'
+      //'test/browser-codepath-test.js',
+        'test/browser-zlib-test2.js'//,
+      //'test/browser-raw-test.js'
     ]
   }
 );

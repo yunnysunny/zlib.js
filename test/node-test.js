@@ -76,12 +76,12 @@ buster.testCase(
       var decodedData = new Buffer(testData, 'base64');
 
       // testdata size
-      assert.equals(testData.length, 1604, "source data size");
-      assert.equals(decodedData.length, 1202, "base64 decoded data size");
+      buster.assert.equals(testData.length, 1604, "source data size");
+      buster.assert.equals(decodedData.length, 1202, "base64 decoded data size");
 
       var inflated = zlib.inflateSync(decodedData);
 
-      assert.equals(inflated.length, size, "inflated data size");
+      buster.assert.equals(inflated.length, size, "inflated data size");
       assert(arrayEquals(inflated, plain));
     },
     // native deflate, js inflate
@@ -93,8 +93,8 @@ buster.testCase(
       zlibBuffer(new nodeZlib.Deflate({level: 0}), data, function(err, buf) {
         var inflated = zlib.inflateSync(buf);
 
-        assert.equals(inflated.length, data.length);
-        assert.equals(inflated, data);
+        buster.assert.equals(inflated.length, data.length);
+        buster.assert.equals(inflated, data);
 
         done();
       });
@@ -107,7 +107,7 @@ buster.testCase(
       zlibBuffer(new nodeZlib.Deflate({level: 9}), data, function(err, buf) {
         var inflated = zlib.inflateSync(buf);
 
-        assert.equals(inflated.length, data.length);
+        buster.assert.equals(inflated.length, data.length);
         assert(arrayEquals(inflated, data));
 
         done();
@@ -194,7 +194,7 @@ function gzipTest(done, testData) {
   console.log("Deflate:", deflated.length);
   nodeZlib.gunzip(deflated, function(err, buf) {
     console.log("Inflate:", buf.length);
-    assert.equals(buf.length, testData.length);
+    buster.assert.equals(buf.length, testData.length);
     assert(arrayEquals(buf, testData));
 
     done();
@@ -206,7 +206,7 @@ function gunzipTest(done, testData) {
   nodeZlib.gzip(testData, function(err, buf) {
     var inflated = zlib.gunzipSync(buf);
 
-    assert.equals(inflated.length, testData.length);
+    buster.assert.equals(inflated.length, testData.length);
     assert(arrayEquals(inflated, testData));
 
     done();
