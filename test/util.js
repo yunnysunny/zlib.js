@@ -164,8 +164,8 @@ utf8.unserializeByteArray = function(arr) {
             str += '%'+hex;
         }
     }
+    str = decodeURIComponent(str);
 
-    console.log(str);
     return str;
 }
 
