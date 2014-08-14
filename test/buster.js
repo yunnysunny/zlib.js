@@ -10,6 +10,7 @@ var browserCommon = {
     libs: [
       "vendor/mt.js/mt.js",
       "test/use_typedarray.js",
+
       "test/util.js"
     ],
     tests: [

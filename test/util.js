@@ -51,6 +51,26 @@ function decodeB64(str) {
 
   return decoded;
 }
+function encodeBase64(arr)
+{
+    var map="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"; //Base64从0到63的对应编码字符集
+    var buffer=0,result="";
+
+    for(var i=0;i<arr.length;i++)
+    {
+        buffer=(buffer<<8)+arr[i];
+        if(i%3==2) //每3个字节处理1次
+        {
+            result+=map.charAt(buffer>>18)+map.charAt(buffer>>12&0x3f)+map.charAt(buffer>>6&0x3f)+map.charAt(buffer&0x3f);
+            buffer=0;
+        }
+    } //3的整数倍的字节已处理完成，剩余的字节仍存放于buffer中
+    if(arr.length%3==1) //剩余1个字节
+        result+=map.charAt(buffer>>2)+map.charAt(buffer<<4&0x3f)+"==";
+    else if(arr.length%3==2) //剩余2个字节
+        result+=map.charAt(buffer>>10)+map.charAt(buffer>>4&0x3f)+map.charAt(buffer<<2&0x3f)+"=";
+    return result;
+}
 
 //-----------------------------------------------------------------------------
 // array assertion
